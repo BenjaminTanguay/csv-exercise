@@ -27,8 +27,6 @@ The goal of this exercise is to produce a production ready web service that allo
 
 ## Ordered TODO (for me internally)
 
-- POM including dependencies and fat jar code
-- Hello world application + test
 - Start to code basic web server
 - Large test
 - Work on CSV
@@ -39,3 +37,5 @@ The goal of this exercise is to produce a production ready web service that allo
 - Support many CSVs
 
 ## DONE
+- POM including dependencies and fat jar code
+- Hello world application + test
