@@ -27,8 +27,6 @@ The goal of this exercise is to produce a production ready web service that allo
 
 ## Ordered TODO (for me internally)
 
-- Start to code basic web server
-- Large test
 - Work on CSV
 - Complete first feature
 - Configuration
@@ -40,3 +38,5 @@ The goal of this exercise is to produce a production ready web service that allo
 - POM including dependencies and fat jar code
 - Hello world application + test
 - Boiler plate to start the application
+- Start to code basic web server
+- Large test

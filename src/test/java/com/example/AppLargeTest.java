@@ -28,7 +28,7 @@ public class AppLargeTest {
     }
 
     @Test
-    void should_when(VertxTestContext vertxTestContext) {
+    void should_respond200AndData_when_requestIsReceived(VertxTestContext vertxTestContext) {
         // GIVEN
         App.main(null);
         // We wait for the app to be up.

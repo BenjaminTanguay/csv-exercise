@@ -46,7 +46,7 @@ class HttpServerTest {
     }
 
     @Test
-    void should_returnSuccess_when_started(Vertx vertx, VertxTestContext vertxTestContext) {
+    void should_respondExpectedThing_when_serverIsStartedAndRequestIsReceived(Vertx vertx, VertxTestContext vertxTestContext) {
         // GIVEN
         WebClient client = WebClient.create(vertx);
         httpServer.start()
