@@ -1,6 +1,5 @@
 package com.example.dao;
 
-import com.example.LifeCycle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.junit5.VertxExtension;
@@ -9,19 +8,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(VertxExtension.class)
 public class CsvDaoSmallTest {
 
-    private static final String CSV_PATH = "classpath:BoulderTrailHeads.csv";
+    private static final String FILE_NAME = "BoulderTrailHeads.csv";
 
     private CvsDao csvDao;
 
 
     @BeforeEach
-    void setUp(Vertx vertx) {
-        this.csvDao = new CvsDao(CSV_PATH, vertx);
+    void setUp(Vertx vertx) throws URISyntaxException {
+        URL resource = getClass().getClassLoader().getResource(FILE_NAME);
+        String csvPath = Paths.get(resource.toURI()).toString();
+        this.csvDao = new CvsDao(csvPath, vertx.fileSystem());
     }
 
     @Test
