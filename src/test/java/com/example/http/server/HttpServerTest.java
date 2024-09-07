@@ -1,11 +1,13 @@
 package com.example.http.server;
 
 import io.vertx.core.Future;
+import io.vertx.ext.web.Router;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(VertxExtension.class)
@@ -14,9 +16,11 @@ class HttpServerTest {
 
     private HttpServer httpServer;
 
+    @Mock private Router router;
+
     @BeforeEach
     void setUp() {
-        this.httpServer = new HttpServer();
+        this.httpServer = new HttpServer(router);
     }
 
     @Test
