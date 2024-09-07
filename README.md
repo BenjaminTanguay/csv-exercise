@@ -39,3 +39,4 @@ The goal of this exercise is to produce a production ready web service that allo
 ## DONE
 - POM including dependencies and fat jar code
 - Hello world application + test
+- Boiler plate to start the application
