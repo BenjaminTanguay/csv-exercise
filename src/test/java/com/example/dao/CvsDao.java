@@ -10,6 +10,8 @@ public class CvsDao implements LifeCycle {
     private final String csvPath;
     private final Vertx vertx;
 
+    private String csv;
+
     @Inject
     public CvsDao(String csvPath, Vertx vertx) {
         this.csvPath = csvPath;
@@ -24,5 +26,9 @@ public class CvsDao implements LifeCycle {
     @Override
     public Future<Void> stop() {
         return Future.succeededFuture();
+    }
+
+    public boolean isCsvLoaded() {
+        return csv != null;
     }
 }

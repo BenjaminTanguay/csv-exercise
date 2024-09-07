@@ -9,12 +9,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @ExtendWith(VertxExtension.class)
 public class CsvDaoSmallTest {
 
     private static final String CSV_PATH = "classpath:BoulderTrailHeads.csv";
 
-    private LifeCycle csvDao;
+    private CvsDao csvDao;
 
 
     @BeforeEach
@@ -31,7 +33,10 @@ public class CsvDaoSmallTest {
 
         // THEN
         future
-                .onSuccess(ok -> vertxTestContext.completeNow())
+                .onSuccess(ok -> vertxTestContext.verify(() -> {
+                    assertThat(csvDao.isCsvLoaded()).isTrue();
+                    vertxTestContext.completeNow();
+                }))
                 .onFailure(vertxTestContext::failNow);
     }
 
