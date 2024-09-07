@@ -2,6 +2,7 @@ package com.example.http.server;
 
 import com.example.LifeCycle;
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import jakarta.inject.Inject;
@@ -21,8 +22,23 @@ public class HttpServer implements LifeCycle {
 
     @Override
     public Future<Void> start() {
+        Promise<Void> promise = Promise.promise();
         log.info("Starting HttpServer");
-        return Future.succeededFuture();
+
+        vertx.createHttpServer()
+                .requestHandler(router)
+                .listen(8080)
+                .onSuccess(ok -> {
+                    promise.complete();
+                    log.info("HTTP server started on port 8080");
+                })
+                .onFailure(throwable -> {
+                    log.error("HTTP server failed to start", throwable);
+                    promise.fail(throwable);
+
+                });
+
+        return promise.future();
     }
 
     @Override
