@@ -19,7 +19,7 @@ public class DaoModule extends AbstractModule {
     @Provides
     @Singleton
     String providesCsvPath() {
-        return "./conf/BoulderTrailHeads.csv";
+        return "./conf/input.csv";
     }
 
     @Provides
