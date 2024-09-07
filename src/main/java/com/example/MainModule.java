@@ -25,4 +25,10 @@ public class MainModule extends AbstractModule {
     Router providesRouter() {
         return Router.router(vertx);
     }
+
+    @Provides
+    @Singleton
+    Vertx providesVertx() {
+        return vertx;
+    }
 }
