@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.junit5.VertxExtension;
@@ -28,7 +29,7 @@ public class CsvDaoTest {
     void setUp(Vertx vertx) throws URISyntaxException {
         URL resource = getClass().getClassLoader().getResource(FILE_NAME);
         String csvPath = Paths.get(resource.toURI()).toString();
-        this.csvDao = new CvsDao(csvPath, vertx.fileSystem());
+        this.csvDao = new CvsDao(csvPath, vertx.fileSystem(), new CsvMapper());
     }
 
     @Test
@@ -42,6 +43,7 @@ public class CsvDaoTest {
         future
                 .onSuccess(ok -> vertxTestContext.verify(() -> {
                     assertThat(csvDao.isCsvLoaded()).isTrue();
+                    assertThat(csvDao.lines()).isEqualTo(37);
                     vertxTestContext.completeNow();
                 }))
                 .onFailure(vertxTestContext::failNow);

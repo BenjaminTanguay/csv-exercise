@@ -3,6 +3,7 @@ package com.example;
 import com.example.http.model.HttpRoute;
 import com.example.http.route.DataFilterRequestHandler;
 import com.example.http.server.HttpServer;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -62,6 +63,12 @@ public class MainModule extends AbstractModule {
     @Singleton
     String providesCsvPath() {
         return "./conf/BoulderTrailHeads.csv";
+    }
+
+    @Provides
+    @Singleton
+    CsvMapper providesCsvMapper() {
+        return new CsvMapper();
     }
 
     @Provides
