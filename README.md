@@ -14,29 +14,26 @@ The goal of this exercise is to produce a production ready web service that allo
 - I will try to finish this exercise in 3 hours or less starting at the time I commit this file
 - I will use vertx to create the webapp as I am used to work with it. This library is not like springboot or quarkus as in it doesn't come out of the box with thousands of nice-to-have such as automated deployment to docker, metrics, api documentation, configuration already done, etc. I will have to create more boilerplate by hand and abandon some of those nice-to-have entirely. I believe this is acceptable since this is only an exercise.
 
-## Features I want to implement in any order (before I start)
+## How to run
 
-- A GET HTTP endpoint should allow a user to query the CSV for elements within matching what is passed as path params.
-- I want large tests to test my API
-- The http port and csv file location should be configurable
-- Ideally, we would be able to configure many CSV and have the endpoint be flexible enough to switch between CSVs
-- I would like the application to be flexible enough to work with any CSV without having to hardcode column names.
-- I would like to deliver the app as a fat jar
-- I would like to dockerize the application
-- I would like to have an endpoint that allows us to check the domain value of columns within the CSV
+The application can be built and launch using the `startApp.sh` script. The application requires java 21 to be run. Specifically, it was built using Java 21.0.4-temurin. 
 
-## Ordered TODO (for me internally)
+The webserver doesn't take any configuration for now. It listens for GET requests on port 8080 at route /v1/data-filter. The webserver is built so that it takes a csv named input.csv in the conf folder as an input. The user can query the csv for specific fields using query params. For example, this request fetches all elements that contain restrooms, 4 trashcans but no fishing spots `http://localhost:8080/v1/data-filter?RESTROOMS=Yes&FISHING=No&TrashCans=4`. The query params are all case sensitive and will match exactly with what is found in the csv so be careful.
 
-- Work on CSV
-- Complete first feature
-- Configuration
-- Docker
-- Second endpoint to check domain value of columns
-- Support many CSVs
+The webserver works with any csv file and not only the one provided. However, CSVs provided must always have the first row dedicated to label the columns.
 
-## DONE
-- POM including dependencies and fat jar code
-- Hello world application + test
-- Boiler plate to start the application
-- Start to code basic web server
-- Large test
+## Tradeoffs
+
+- The application was done with the idea in mind that the CSV could change in the future and that it shouldn't require any code change to accomodate a specific CSV. This means that the structures manipulated in the code are not strongly typed. Instead of manipulating pojos, we manipulate a list of maps of strings.
+- This project was labeled as a csv exercise but there is an interface in the project that could be implemented by other data provider such as a database or an external ressource.
+- Because we assume that the CSVs this server works with will be small, we simply load them in memory at the application start. If the CSVs were bigger in nature, the strategy would probably be to load them to a database and query that instead. The Dao interface allows for this change although the CSV lifecycle would have to be disconnected.
+
+## Thoughts after exercise
+
+- I only got the base feature implemented
+- Boiler plate took me a long time to setup. By the time I was done with the basis of the server, I had about an hour left. Using springboot or quarkus, I could probably have saved 1h30 here. On the flip side, the application is future development would be more flexible because it would be done without a rigid structure that these big frameworks sometime enforce
+- I am annoyed I didn't get the time to have a configuration online.
+- I believe other features wouldn't take too long to get out now that the whole infrastructure (tests, injection, server, read the csv, etc) is here.
+- The application is almost entirely tested which is good considering the time frame of the exercise.
+
+
