@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.http.server.HttpServer;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.ProvidesIntoSet;
 import io.vertx.core.Vertx;
@@ -12,8 +13,8 @@ public class MainModule extends AbstractModule {
     private final Vertx vertx;
 
     @ProvidesIntoSet
-    public LifeCycle provideHelloWorldLifeCycle(HelloWorldLifeCycle helloWorldLifeCycle) {
-        return helloWorldLifeCycle;
+    public LifeCycle provideHelloWorldLifeCycle(HttpServer httpServer) {
+        return httpServer;
     }
 
 }
