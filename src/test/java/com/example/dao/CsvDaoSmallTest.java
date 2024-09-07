@@ -19,7 +19,7 @@ public class CsvDaoSmallTest {
 
     @BeforeEach
     void setUp(Vertx vertx) {
-        this.csvDao = new CvsDao(CSV_PATH);
+        this.csvDao = new CvsDao(CSV_PATH, vertx);
     }
 
     @Test

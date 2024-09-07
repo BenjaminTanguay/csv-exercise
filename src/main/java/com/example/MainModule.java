@@ -53,6 +53,12 @@ public class MainModule extends AbstractModule {
 
     @Provides
     @Singleton
+    String providesCsvPath() {
+        return "./conf/BoulderTrailHeads.csv";
+    }
+
+    @Provides
+    @Singleton
     int providesServerPort() {
         return 8080;
     }
