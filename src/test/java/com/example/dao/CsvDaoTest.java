@@ -67,15 +67,20 @@ public class CsvDaoTest {
     void should_filterFields_when_filterMethodCalled(VertxTestContext vertxTestContext) {
         // GIVEN
         Map<String, String> filters = new HashMap<>();
+        filters.put("RESTROOMS", "Yes");
+        filters.put("AccessID", "279");
         csvDao.start()
 
         // WHEN
                 .map(ok -> csvDao.filterRecords(filters))
 
         // THEN
-                .onSuccess(ok -> vertxTestContext.completeNow())
+                .onSuccess(result -> vertxTestContext.verify(() -> {
+                    assertThat(result.size()).isEqualTo(1);
+                    assertThat(result.get(0).get("Address")).isEqualTo("621 Flagstaff Summit Rd");
+                    vertxTestContext.completeNow();
+                }))
                 .onFailure(vertxTestContext::failNow);
-
     }
 
 }

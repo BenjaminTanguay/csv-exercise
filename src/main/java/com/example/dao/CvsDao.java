@@ -12,7 +12,6 @@ import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +77,10 @@ public class CvsDao implements LifeCycle, Dao {
 
     @Override
     public List<Map<String, String>> filterRecords(Map<String, String> filters) {
-        return List.of();
+
+        return this.csv.stream()
+                .filter(map -> filters.entrySet().stream().allMatch(filter -> map.containsKey(filter.getKey()) && map.get(filter.getKey()).equals(filter.getValue())))
+                .toList();
+
     }
 }
