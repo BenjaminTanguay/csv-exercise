@@ -28,6 +28,7 @@
     <test.junit-platform-suite.version>1.11.0</test.junit-platform-suite.version>
     <test.junit-pioneer.version>2.2.0</test.junit-pioneer.version>
     <test.json-unit.version>3.4.1</test.json-unit.version>
+    <test.awaitility.version>4.2.2</test.awaitility.version>
 
     <plugin.surefire.version>3.5.0</plugin.surefire.version>
     <plugin.maven-shade.version>3.6.0</plugin.maven-shade.version>
@@ -179,6 +180,12 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
       <version>${test.junit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <version>${test.awaitility.version}</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>

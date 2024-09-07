@@ -75,7 +75,6 @@ class HttpServerTest {
     }
 
     private void handleHelloRoute(RoutingContext routingContext) {
-        // Respond with "Hello, Vert.x!"
         routingContext.response()
                 .putHeader("content-type", "text/plain")
                 .end(EXPECTED_RESPONSE);
