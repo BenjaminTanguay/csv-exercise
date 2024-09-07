@@ -24,3 +24,18 @@ The goal of this exercise is to produce a production ready web service that allo
 - I would like to deliver the app as a fat jar
 - I would like to dockerize the application
 - I would like to have an endpoint that allows us to check the domain value of columns within the CSV
+
+## Ordered TODO (for me internally)
+
+- POM including dependencies and fat jar code
+- Hello world application + test
+- Start to code basic web server
+- Large test
+- Work on CSV
+- Complete first feature
+- Configuration
+- Docker
+- Second endpoint to check domain value of columns
+- Support many CSVs
+
+## DONE
