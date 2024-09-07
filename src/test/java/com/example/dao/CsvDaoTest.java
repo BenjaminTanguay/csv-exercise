@@ -22,14 +22,14 @@ public class CsvDaoTest {
 
     private static final String FILE_NAME = "BoulderTrailHeads.csv";
 
-    private CvsDao csvDao;
+    private CsvDao csvDao;
 
 
     @BeforeEach
     void setUp(Vertx vertx) throws URISyntaxException {
         URL resource = getClass().getClassLoader().getResource(FILE_NAME);
         String csvPath = Paths.get(resource.toURI()).toString();
-        this.csvDao = new CvsDao(csvPath, vertx.fileSystem(), new CsvMapper());
+        this.csvDao = new CsvDao(csvPath, vertx.fileSystem(), new CsvMapper());
     }
 
     @Test

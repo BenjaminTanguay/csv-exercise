@@ -9,6 +9,7 @@ import io.vertx.core.Promise;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.file.FileSystem;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -16,7 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class CvsDao implements LifeCycle, Dao {
+@Singleton
+public class CsvDao implements LifeCycle, Dao {
 
     private final String csvPath;
     private final FileSystem fileSystem;
@@ -25,7 +27,7 @@ public class CvsDao implements LifeCycle, Dao {
     private List<Map<String, String>> csv;
 
     @Inject
-    public CvsDao(String csvPath, FileSystem fileSystem, CsvMapper csvMapper) {
+    public CsvDao(String csvPath, FileSystem fileSystem, CsvMapper csvMapper) {
         this.csvPath = csvPath;
         this.fileSystem = fileSystem;
         this.csvMapper = csvMapper;
