@@ -11,11 +11,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(VertxExtension.class)
-public class CsvDaoSmallTest {
+public class CsvDaoTest {
 
     private static final String FILE_NAME = "BoulderTrailHeads.csv";
 
@@ -57,6 +59,21 @@ public class CsvDaoSmallTest {
         future
                 .onSuccess(ok -> vertxTestContext.completeNow())
                 .onFailure(vertxTestContext::failNow);
+    }
+
+    @Test
+    void should_filterFields_when_filterMethodCalled(VertxTestContext vertxTestContext) {
+        // GIVEN
+        Map<String, String> filters = new HashMap<>();
+        csvDao.start()
+
+        // WHEN
+                .map(ok -> csvDao.getFieldsCorrespondingToFilters(filters))
+
+        // THEN
+                .onSuccess(ok -> vertxTestContext.completeNow())
+                .onFailure(vertxTestContext::failNow);
+
     }
 
 }
