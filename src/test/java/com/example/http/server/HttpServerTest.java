@@ -20,6 +20,7 @@ class HttpServerTest {
 
     private static final String HELLO_ROUTE = "/hello";
     private static final String EXPECTED_RESPONSE = "expected_response";
+    private static final int PORT = 1234;
 
     private HttpServer httpServer;
 
@@ -28,7 +29,7 @@ class HttpServerTest {
     void setUp(Vertx vertx) {
         Router router = Router.router(vertx);
         router.get(HELLO_ROUTE).handler(this::handleHelloRoute);
-        this.httpServer = new HttpServer(router, vertx);
+        this.httpServer = new HttpServer(router, vertx, PORT);
     }
 
     @Test
@@ -51,7 +52,7 @@ class HttpServerTest {
         httpServer.start()
 
         // WHEN
-                .compose(ok -> client.get(8080, "localhost", HELLO_ROUTE).send())
+                .compose(ok -> client.get(PORT, "localhost", HELLO_ROUTE).send())
         // THEN
                 .onSuccess(response -> vertxTestContext.verify(() -> {
                     assertThat(response.body().toString()).isEqualTo(EXPECTED_RESPONSE);

@@ -31,4 +31,10 @@ public class MainModule extends AbstractModule {
     Vertx providesVertx() {
         return vertx;
     }
+
+    @Provides
+    @Singleton
+    int providesServerPort() {
+        return 8080;
+    }
 }

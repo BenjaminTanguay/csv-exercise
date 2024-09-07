@@ -13,11 +13,13 @@ public class HttpServer implements LifeCycle {
 
     private final Router router;
     private final Vertx vertx;
+    private final int port;
 
     @Inject
-    public HttpServer(Router router, Vertx vertx) {
+    public HttpServer(Router router, Vertx vertx, int port) {
         this.router = router;
         this.vertx = vertx;
+        this.port = port;
     }
 
     @Override
@@ -27,7 +29,7 @@ public class HttpServer implements LifeCycle {
 
         vertx.createHttpServer()
                 .requestHandler(router)
-                .listen(8080)
+                .listen(port)
                 .onSuccess(ok -> {
                     promise.complete();
                     log.info("HTTP server started on port 8080");
