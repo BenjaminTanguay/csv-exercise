@@ -8,8 +8,11 @@ import io.vertx.core.file.FileSystem;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+import java.util.Map;
+
 @Slf4j
-public class CvsDao implements LifeCycle {
+public class CvsDao implements LifeCycle, Dao {
 
     private final String csvPath;
     private final FileSystem fileSystem;
@@ -48,5 +51,10 @@ public class CvsDao implements LifeCycle {
 
     public boolean isCsvLoaded() {
         return csv != null;
+    }
+
+    @Override
+    public List<Map<String, String>> filterRecords(Map<String, String> filters) {
+        return List.of();
     }
 }

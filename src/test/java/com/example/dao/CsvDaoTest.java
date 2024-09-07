@@ -68,7 +68,7 @@ public class CsvDaoTest {
         csvDao.start()
 
         // WHEN
-                .map(ok -> csvDao.getFieldsCorrespondingToFilters(filters))
+                .map(ok -> csvDao.filterRecords(filters))
 
         // THEN
                 .onSuccess(ok -> vertxTestContext.completeNow())
