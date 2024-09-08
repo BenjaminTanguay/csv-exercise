@@ -27,6 +27,7 @@ The webserver works with any csv file and not only the one provided. However, CS
 - The application was done with the idea in mind that the CSV could change in the future and that it shouldn't require any code change to accomodate a specific CSV. This means that the structures manipulated in the code are not strongly typed. Instead of manipulating pojos, we manipulate a list of maps of strings.
 - This project was labeled as a csv exercise but there is an interface in the project that could be implemented by other data provider such as a database or an external ressource.
 - Because we assume that the CSVs this server works with will be small, we simply load them in memory at the application start. If the CSVs were bigger in nature, the strategy would probably be to load them to a database and query that instead. The Dao interface allows for this change although the CSV lifecycle would have to be disconnected.
+- The use of vertx means that the application is asynchronous in nature. It should allow for a bigger load then a naive implementation of a server.
 
 ## Thoughts after exercise
 
@@ -35,5 +36,7 @@ The webserver works with any csv file and not only the one provided. However, CS
 - I am annoyed I didn't get the time to have a configuration online.
 - I believe other features wouldn't take too long to get out now that the whole infrastructure (tests, injection, server, read the csv, etc) is here.
 - The application is almost entirely tested which is good considering the time frame of the exercise.
+- I should have put a try-catch block in my server component so that I could return 500 errors if problems occur. I was pressed for time when I did this part so I didn't think it through.
+- I should have made the Dao interface return a future since it would allow me to asynchronously work with other data source that aren't already loaded in a data structure like an external database.
 
 
